@@ -15,6 +15,10 @@ const logger = {
     console.error(chalk.red(err));
   },
 
+  dbOpen: () => {
+    console.log('Connection to the db is open');
+  },
+
   // Called when express.js app starts on given port w/o errors
   appStarted: (port, host, tunnelStarted) => {
     console.log(`Server started ! ${chalk.green('✓')}`);

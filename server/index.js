@@ -2,7 +2,9 @@
 
 const express = require('express');
 const logger = require('./logger');
+const { getMessages, saveMessage } = require('../db/controllers');
 
+const bodyParser = require('body-parser');
 const argv = require('./argv');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
@@ -13,6 +15,25 @@ const app = express();
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+
+app.use(bodyParser.json());
+
+app.get('/messages', (req, res) => {
+  getMessages().then((data) => {
+    res.send(data);
+  });
+});
+
+app.post('/messages', (req, res) => {
+  saveMessage(req.body)
+  .then((data) => {
+    req.status(200).send(data);
+  })
+  .catch((err) => {
+    logger.error(err);
+    res.status(500).send(err);
+  });
+});
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
