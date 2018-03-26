@@ -15,6 +15,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import MessageList from 'containers/MessageList/Loadable';
+import CreateMessage from 'containers/CreateMessage/index';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
     <div>
       <Switch>
         <Route exact path="/" component={MessageList} />
+        <Route exact path="/messages/new" component={CreateMessage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
