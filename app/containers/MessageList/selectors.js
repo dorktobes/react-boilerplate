@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 const getMessages = (state) => {
-  let messages = state.getIn(['messageList', 'messages']);
+  const messages = state.getIn(['messageList', 'messages']);
   return messages;
 };
 
@@ -10,4 +10,4 @@ const makeSelectMessages = () => createSelector(
   (messages) => messages
 );
 
-export default  makeSelectMessages;
+export default makeSelectMessages;

@@ -1,35 +1,32 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-import makeSelectMessages from './selectors';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import getMessages from './actions';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
+import messages from './messages';
+import makeSelectMessages from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { loadMessages } from './actions';
+
 
 class MessageList extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
 
   componentWillMount() {
-    console.log('component will mount', this.props.messages, !!this.props.messages);
-    if(!this.props.messages.length) {
-      this.props.getMessages();
+    if (!this.props.messages.length) {
+      this.props.loadMessages();
     }
   }
 
   renderMessages() {
     if (this.props.messages) {
-      return this.props.messages.map(message => <li key={message._id}>{message.body}</li>);
-    } else {
-      return <h5>There are no messages yet :-(</h5>
+      return this.props.messages.map(({ _id, body }) => <li key={_id}>{body}</li>);
     }
+    return <h5>There are no messages yet :-(</h5>;
   }
   render() {
     return (
@@ -43,11 +40,16 @@ class MessageList extends React.PureComponent {
       </div>
     );
   }
+}
+
+MessageList.propTypes = {
+  messages: PropTypes.array,
+  loadMessages: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getMessages: () => dispatch(getMessages()),
+    loadMessages: () => dispatch(loadMessages()),
   };
 }
 
@@ -56,7 +58,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
 const withReducer = injectReducer({ key: 'messageList', reducer });
 const withSaga = injectSaga({ key: 'messageList', saga });
 

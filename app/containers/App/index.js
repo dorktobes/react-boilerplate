@@ -14,7 +14,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import MessageList from 'containers/MessageList/index';
+import MessageList from 'containers/MessageList/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 export default function App() {

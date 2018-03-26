@@ -1,13 +1,12 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { LOAD_MESSAGES } from './constants';
-import loadMessages from './actions';
 import fetchMessages from 'utils/fetchMessages';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { LOAD_MESSAGES } from './constants';
+import { loadMessagesSuccess } from './actions';
 
 function* getMessages() {
-    const messages = yield call(fetchMessages);
-    console.log('in saga', messages);
-    yield put(loadMessages(messages));
-};
+  const messages = yield call(fetchMessages);
+  yield put(loadMessagesSuccess(messages));
+}
 
 export default function* messagesSaga() {
   // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
