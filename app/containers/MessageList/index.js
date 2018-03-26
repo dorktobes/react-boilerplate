@@ -43,7 +43,10 @@ class MessageList extends React.PureComponent {
 }
 
 MessageList.propTypes = {
-  messages: PropTypes.array,
+  messages: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object,
+  ]),
   loadMessages: PropTypes.func,
 };
 
