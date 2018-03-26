@@ -18,6 +18,11 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  console.log(`serving ${req.method} at ${req.url}`);
+  next();
+})
+
 app.get('/messages', (req, res) => {
   getMessages().then((data) => {
     res.send(data);

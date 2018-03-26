@@ -1,10 +1,8 @@
 import { createSelector } from 'reselect';
 
-const selectRoute = (state) => state.get('route');
-
 const getMessages = (state) => {
-  console.log(state);
-  return state.messages;
+  let messages = state.getIn(['messageList', 'messages']);
+  return messages;
 };
 
 const makeSelectMessages = () => createSelector(
