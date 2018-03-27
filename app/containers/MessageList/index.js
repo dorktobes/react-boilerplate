@@ -18,9 +18,7 @@ import { loadMessages } from './actions';
 class MessageList extends React.PureComponent {
 
   componentWillMount() {
-    if (!this.props.messages.length) {
-      this.props.loadMessages();
-    }
+    this.props.loadMessages();
   }
 
   renderMessages() {

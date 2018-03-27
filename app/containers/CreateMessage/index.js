@@ -14,10 +14,13 @@ import { makeSelectQuery } from './selectors';
 import reducer from './reducers';
 import saga from './saga';
 
+let rerouteCreateMessageOnSuccess;
+
 class CreateMessage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.onSubmit = this.props.onSubmit.bind(this);
+    rerouteCreateMessageOnSuccess = rerouteOnSuccess.bind(this);
   }
 
   render() {
@@ -45,6 +48,12 @@ CreateMessage.propTypes = {
   onSubmit: PropTypes.func,
 };
 
+function rerouteOnSuccess() {
+  this.props.history.push('/');
+}
+
+export { rerouteCreateMessageOnSuccess };
+
 const mapDispatchToProps = (dispatch) => (
   {
     onQueryChange(event) {
@@ -54,7 +63,7 @@ const mapDispatchToProps = (dispatch) => (
     onSubmit(event) {
       event.preventDefault();
       const body = makeSelectQuery();
-      this.props.history.push('/');
+      // this.props.history.push('/');
       return dispatch(postMessage(body));
     },
   }

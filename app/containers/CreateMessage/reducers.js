@@ -14,7 +14,9 @@ const createMessageReducer = (state = initialState, action) => {
     case UPDATE_QUERY:
       return state.set('query', action.query);
     case POST_MESSAGE_SUCCESS:
-      return state.set('query', '');
+      return state
+      .set('query', '')
+      .setIn(['location', 'pathname'], '/');
     default:
       return state;
   }

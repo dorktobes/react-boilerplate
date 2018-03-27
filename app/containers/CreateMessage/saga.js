@@ -1,7 +1,7 @@
 import postMessages from 'utils/postMessage';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { makeSelectQuery } from './selectors';
-import { postMessageSuccess } from './actions';
+import { rerouteCreateMessageOnSuccess } from './index';
 import {
   POST_MESSAGE,
 } from './constants';
@@ -10,7 +10,7 @@ function* postMessageGenerator() {
   const body = yield select(makeSelectQuery());
   if (typeof body === 'string' && body) {
     yield call(postMessages.bind(null, body));
-    yield put(postMessageSuccess());
+    yield put(rerouteCreateMessageOnSuccess());
   }
 }
 
