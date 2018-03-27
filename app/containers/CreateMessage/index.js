@@ -63,7 +63,6 @@ const mapDispatchToProps = (dispatch) => (
     onSubmit(event) {
       event.preventDefault();
       const body = makeSelectQuery();
-      // this.props.history.push('/');
       return dispatch(postMessage(body));
     },
   }
