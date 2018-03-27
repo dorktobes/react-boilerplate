@@ -40,7 +40,8 @@ class MessageList extends React.PureComponent {
         </ul>
         <div>
           <Link
-          to="/messages/new">
+            to="/messages/new"
+          >
           Add a message!
           </Link>
         </div>
@@ -57,11 +58,13 @@ MessageList.propTypes = {
   loadMessages: PropTypes.func,
 };
 
-export function mapDispatchToProps(dispatch) {
-  return {
-    loadMessages: () => dispatch(loadMessages()),
-  };
-}
+const mapDispatchToProps = (dispatch) => (
+  {
+    loadMessages() {
+      return dispatch(loadMessages());
+    },
+  }
+);
 
 const mapStateToProps = createStructuredSelector({
   messages: makeSelectMessages(),

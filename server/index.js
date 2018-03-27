@@ -27,7 +27,7 @@ app.get('/messages', (req, res) => {
 app.post('/messages', (req, res) => {
   saveMessage(req.body)
   .then((data) => {
-    req.status(200).send(data);
+    res.status(200).send(data);
   })
   .catch((err) => {
     logger.error(err);
