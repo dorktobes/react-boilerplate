@@ -2,12 +2,14 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { PropTypes } from 'prop-types';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
+import H1 from '../MessageList/H1';
+import StyledLink from './StyledLink';
+import Input from './Input';
 import messages from './messages';
 import { changeQuery, postMessage } from './actions';
 import { makeSelectQuery } from './selectors';
@@ -27,17 +29,17 @@ class CreateMessage extends React.PureComponent {
   render() {
     return (
       <div>
-        <Link to="/">go back to list</Link>
-        <h1>
+        <StyledLink to="/">go back to list</StyledLink>
+        <H1>
           <FormattedMessage {...messages.header} />
-        </h1>
+        </H1>
         <form
           onSubmit={this.onSubmit}
         >
-          <input
+          <Input
             type="text"
             onChange={this.props.onQueryChange}
-          ></input>
+          ></Input>
         </form>
       </div>
     );
