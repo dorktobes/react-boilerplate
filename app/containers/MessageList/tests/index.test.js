@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { MessageList } from '../index';
+import Li from '../Li';
 
 describe('<MessageList />', () => {
   it('should call loadMessages() when mounted', () => {
@@ -9,12 +10,12 @@ describe('<MessageList />', () => {
     shallow(<MessageList loadMessages={loadMessagesSpy} />);
     expect(loadMessagesSpy).toHaveBeenCalled();
   });
-  it('should not contain any <li>\'s if there are no messages', () => {
+  it('should not contain any <Li>\'s if there are no messages', () => {
     const loadMessagesSpy = jest.fn();
     const shallowRender = shallow(<MessageList loadMessages={loadMessagesSpy} messages={[]} />);
-    expect(shallowRender.find('li').length).toEqual(0);
+    expect(shallowRender.contains(<Li />)).toEqual(false);
   });
-  it('should render one <li> per message', () => {
+  it('should render one <Li> per message', () => {
     const loadMessagesSpy = jest.fn();
     const messages = [
       {
@@ -27,6 +28,6 @@ describe('<MessageList />', () => {
       },
     ];
     const shallowRender = shallow(<MessageList loadMessages={loadMessagesSpy} messages={messages} />);
-    expect(shallowRender.find('li').length).toEqual(2);
+    expect(shallowRender.find(Li).length).toEqual(2);
   });
 });
