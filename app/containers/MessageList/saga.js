@@ -3,7 +3,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { LOAD_MESSAGES } from './constants';
 import { loadMessagesSuccess } from './actions';
 
-function* getMessages() {
+export function* getMessages() {
   const messages = yield call(fetchMessages);
   yield put(loadMessagesSuccess(messages));
 }

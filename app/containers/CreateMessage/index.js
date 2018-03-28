@@ -14,6 +14,7 @@ import { makeSelectQuery } from './selectors';
 import reducer from './reducers';
 import saga from './saga';
 
+ /* eslint-disable import/no-mutable-exports */
 let rerouteCreateMessageOnSuccess;
 
 class CreateMessage extends React.PureComponent {

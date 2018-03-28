@@ -15,7 +15,7 @@ import saga from './saga';
 import { loadMessages } from './actions';
 
 
-class MessageList extends React.PureComponent {
+export class MessageList extends React.PureComponent {
 
   componentWillMount() {
     this.props.loadMessages();
