@@ -8,8 +8,8 @@ import {
 
 function* postMessageGenerator() {
   const body = yield select(makeSelectQuery());
-  if (typeof body === 'string' && body) {
-    yield call(postMessages.bind(null, body));
+  if (typeof body === 'string' && body.length) {
+    yield call(() => postMessages(body));
     yield put(rerouteCreateMessageOnSuccess());
   }
 }

@@ -16,13 +16,15 @@ import { makeSelectQuery } from './selectors';
 import reducer from './reducers';
 import saga from './saga';
 
+function rerouteOnSuccess() {
+  this.props.history.push('/');
+}
  /* eslint-disable import/no-mutable-exports */
 let rerouteCreateMessageOnSuccess;
 
 class CreateMessage extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.onSubmit = this.props.onSubmit.bind(this);
     rerouteCreateMessageOnSuccess = rerouteOnSuccess.bind(this);
   }
 
@@ -34,7 +36,7 @@ class CreateMessage extends React.PureComponent {
           <FormattedMessage {...messages.header} />
         </H1>
         <form
-          onSubmit={this.onSubmit}
+          onSubmit={this.props.onSubmit}
         >
           <Input
             type="text"
@@ -51,22 +53,17 @@ CreateMessage.propTypes = {
   onSubmit: PropTypes.func,
 };
 
-function rerouteOnSuccess() {
-  this.props.history.push('/');
-}
 
 export { rerouteCreateMessageOnSuccess };
 
 const mapDispatchToProps = (dispatch) => (
   {
     onQueryChange(event) {
-      event.preventDefault();
       return dispatch(changeQuery(event.target.value));
     },
     onSubmit(event) {
       event.preventDefault();
-      const body = makeSelectQuery();
-      return dispatch(postMessage(body));
+      return dispatch(postMessage());
     },
   }
 );
